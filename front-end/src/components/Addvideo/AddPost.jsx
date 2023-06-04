@@ -62,7 +62,7 @@ const uid = uniqid().toString()
 
       getDownloadURL(fileRef).then((URL_)=>{
         if(!URL_){setErr('Uploading failed')}
-         fetch("http://localhost:3001/add-video" ,{
+         fetch  (`${process.env.BASE_URL}/add-video` ,{
           method : 'POST' , 
           headers: {
             'Content-Type': 'application/json',

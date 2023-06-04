@@ -79,10 +79,11 @@ input[type=file]{
     box-shadow: none;
 }
 
-.shee{
+/* .shee{
     background-position: center;
-    aspect-ratio: ;
-}
+    /* aspect-ratio: ; */
+/* } */ 
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -92,8 +93,6 @@ input[type=file]{
 
 .shee-logo{
 height: 6vh;
-border-bottom-right-radius: 10px; 
-border-bottom-left-radius:10px;
 
 }
 .react-btn{
@@ -112,6 +111,9 @@ border-bottom-left-radius:10px;
 .link{
     color: inherit;
     text-decoration: none;
+}
+.link:hover{
+    color: inherit;
 }
 .controls{
     
@@ -158,12 +160,12 @@ border-bottom-left-radius:10px;
 
 .comment-area{
     background-color: rgb(252, 252, 252);
-    top: 0px;
+    bottom: 0px;
     width: 100%;
-    height: 94vh;
+    height: 90vh;
     /* min-height: 30vh; */
     z-index: 9999999999999999;
-    /* padding-bottom:2vh ;     */
+    padding-bottom:1vh ;    
     /* scale: 0.5; */
     transition: 0.2s;
    
@@ -228,8 +230,8 @@ border-bottom-left-radius:10px;
         padding-top: 0cm;
         width: 100%;
         z-index: 99999;
-         border-top-right-radius: 10px; 
-       border-top-left-radius:10px;
+         border-top-right-radius: 0px; 
+       border-top-left-radius:0px;
     }
 
     .navbar-elements span , .nav-logo{
@@ -238,9 +240,16 @@ border-bottom-left-radius:10px;
 
     .shee-logo{
         color: white;
+        border-radius: 0;
+    }
+
+    .videoTag{
+        border-radius: 0px;
     }
  
-
+.comment-area{
+    height: 80vh;
+}
  
     
   }
