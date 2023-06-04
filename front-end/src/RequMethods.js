@@ -6,7 +6,7 @@ import { useMediaQuery } from "usehooks-ts"
  export async  function getAuth (){
        const token = JSON.parse(localStorage.getItem('auth')) 
       if (token) {
-        const response =  await fetch('http://localhost:3001/user' , {
+        const response =  await fetch(`${process.env.REACT_APP_BASE_URL}/user` , {
             method : 'GET' ,
             headers : {
                 'x-access-token' : token
@@ -14,9 +14,7 @@ import { useMediaQuery } from "usehooks-ts"
          })
         const data  =await response.json()
         return data 
-      } else {
-        return null
-      }
+      } 
  }
 
 
@@ -33,7 +31,7 @@ import { useMediaQuery } from "usehooks-ts"
  }
 
  export async  function getUser (username){
-  const response =  await fetch(`http://localhost:3001/user/${username}` , {
+  const response =  await fetch(`${process.env.REACT_APP_BASE_URL}/user/${username}` , {
    method :'GET',
    headers: {
      'Content-Type': 'application/json',
@@ -46,7 +44,7 @@ import { useMediaQuery } from "usehooks-ts"
 
 
 export async  function getShee (id){
-  const response =  await fetch(`http://localhost:3001/shees/${id}` , {
+  const response =  await fetch(`${process.env.REACT_APP_BASE_URL}/shees/${id}` , {
    method :'GET' ,
    headers: {
     'Content-Type': 'application/json',
@@ -63,7 +61,7 @@ export async  function getShee (id){
 
 
 export  async function pushLike(arr , id) {
-  fetch(`http://localhost:3001/like/${id}`  , {
+  fetch(`${process.env.REACT_APP_BASE_URL}/like/${id}`  , {
     method : 'POST' ,
     headers :{
       'Content-Type': 'application/json'
@@ -79,7 +77,7 @@ export  async function pushLike(arr , id) {
 
 
 export async function pushSave(arr , id) {
-  fetch(`http://localhost:3001/save/${id}`  , {
+  fetch(`${process.env.REACT_APP_BASE_URL}/save/${id}` , {
     method : 'POST' ,
     headers :{
       'Content-Type': 'application/json'
@@ -97,7 +95,7 @@ export async function pushSave(arr , id) {
 
 
 export async function pushComment (obj ){
-  fetch(`http://localhost:3001/comment` , {
+  fetch(`${process.env.REACT_APP_BASE_URL}/comment` , {
            method :'POST',
            headers: {
              'Content-Type': 'application/json',
@@ -112,7 +110,7 @@ export async function pushComment (obj ){
 
 
 export async function getComments (id){
-  const res  = await fetch(`http://localhost:3001/comments/${id}` , {
+  const res  = await fetch(`${process.env.REACT_APP_BASE_URL}/comments/${id}` , {
     method : 'GET' ,
     headers : {
       'Content-Type': 'application/json',
@@ -126,7 +124,7 @@ export async function getComments (id){
 // const [followers , setFollowers] = useState()
 export async  function pushFollow (followers , userToFollow) {
 
-  fetch(`http://localhost:3001/follow/${userToFollow}`  , {
+  fetch(`${process.env.REACT_APP_BASE_URL}/follow/${userToFollow}`  , {
     method : 'POST' ,
     headers :{
       'Content-Type': 'application/json'
@@ -142,8 +140,8 @@ export async  function pushFollow (followers , userToFollow) {
 }
 
 
-export async  function getFollowingList (username){
-  const response =  await fetch(`http://localhost:3001/following/${username}` , {
+export async  function getFollowingList (id){
+  const response =  await fetch(`${process.env.REACT_APP_BASE_URL}/following/${id}` , {
    method :'GET',
    headers: {
      'Content-Type': 'application/json',
@@ -157,7 +155,7 @@ export async  function getFollowingList (username){
 
 export async function getShees() {
   // setLoad(true) 
-  const res = await  fetch('http://localhost:3001/shees' , {
+  const res = await  fetch(`${process.env.REACT_APP_BASE_URL}/shees`, {
     method : 'GET' , 
     headers: {
       'Content-Type': 'application/json',
@@ -173,7 +171,7 @@ export async function getShees() {
 
 export async function getProfileShees(username , saved) {
  
-  const res = await  fetch(`http://localhost:3001/publications/${username}/${saved}` , {
+  const res = await  fetch(`${process.env.REACT_APP_BASE_URL}/${username}/${saved}` , {
     method : 'GET' , 
     headers: {
       'Content-Type': 'application/json',

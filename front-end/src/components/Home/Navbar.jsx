@@ -23,8 +23,8 @@ function Navbar() {
          alert('something went wrong')
       })
   },[]) 
-  const classname = "navlink text-dark link justify-content-center align-items-center fw-bold   d-flex justify-content-lg-start"
-  const activeclass = "navlink fs-6 text-secondary link align-items-center   d-lg-flex  justify-content-lg-start"
+  const classname = "navlink text-dark link justify-content-center align-items-center fw-bold   d-flex justify-content-md-start"
+  const activeclass = "navlink fs-6 text-secondary link align-items-center   d-lg-flex  justify-content-md-start"
   const icon = 'icon mx-3'
   return (
    //  <div className='h-100 w-100 d-flex  ' >
@@ -59,7 +59,7 @@ function Navbar() {
             </NavLink>
 
 
-            <NavLink to={`/${user?.username}`}className={({ isActive }) =>
+            <NavLink to={`/user/${user?.username}`}className={({ isActive }) =>
             isActive ? classname  : activeclass
       } >
                <img src={user?.pdp} className='carre rounded-circle bg-light border border-light mx-3 '   alt="" srcset="" width="32px" />

@@ -60,7 +60,7 @@ function Home() {
 
             {/* <Route path='/:id'  element={ <EmptyHome  /> } /> */}
             <Route path='/'  element={ load ? <SheeLoad /> :   <Window shees={shees}  /> } />
-            <Route path='/:id'  element={ <Profile /> } />
+            <Route path='/user/:id/*'  element={ <Profile /> } />
             <Route path='/search'  element={ <SearchPage />} />
             <Route path='/add-post'  element={ <AddPost /> } />
           </Routes>

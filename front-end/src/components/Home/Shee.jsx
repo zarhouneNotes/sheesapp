@@ -211,7 +211,7 @@ const size = 'medium'
           <div className='align-self-end bg-dange d-flex h-10  justify-content-between w-100 position-relative bg-ino' >
               <div className='align-self-end text-light d-flex align-items-center gap-2 p-2' >
 
-                <Link className='d-flex align-items-center link gap-1'  to={`/${poster?.username}`} >
+                <Link className='d-flex align-items-center link gap-1'  to={`/user/${poster?.username}`} >
                   <img width='40px' className='rounded-circle carre' src={poster?.pdp} alt="" srcset="" />
                     <div>{post?.username}</div>
                 </Link>

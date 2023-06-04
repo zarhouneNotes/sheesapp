@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {ClipLoader} from 'react-spinners'
+import { getUser } from '../../RequMethods'
 
 function Comment({comment}) {
   const [user , setUser] = useState({})
@@ -10,22 +11,11 @@ function Comment({comment}) {
 
 
   
-async function getPoster   (username){
-  setLoad(true)
-  const response =  await fetch(`http://localhost:3001/user/${username}` , {
-            method :'GET',
-            headers: {
-              'Accept': 'application/json',
-          },
-          })
-          const data  =await response.json()
-          setUser(data?.user)
-          setLoad(false)
-          
-    }
 
   useEffect(()=>{
-    getPoster(comment?.author) 
+    getUser(comment?.author).then((res)=>{
+      setUser(res?.user)
+    })
   },[])
 
 

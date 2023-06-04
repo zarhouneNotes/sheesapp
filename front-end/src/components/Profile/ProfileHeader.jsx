@@ -3,6 +3,8 @@ import { getAuth, getFollowingList, pushFollow } from '../../RequMethods'
 import { Button } from 'react-bootstrap'
 import { AiFillEdit, AiOutlineCheck, AiOutlineEye, AiOutlinePlus } from 'react-icons/ai'
 import { useMediaQuery } from 'usehooks-ts'
+import ListModal from './ListModal'
+import ListOfFollowing from './ListOfFollowing'
 
 function ProfileHeader({user , auth , pubs}) {
   const isMobile = useMediaQuery('(max-width: 900px)')
@@ -10,12 +12,12 @@ function ProfileHeader({user , auth , pubs}) {
 
   const [followers , setFollowers] =useState(user?.followers)
   const [following, setFollowing] = useState([])
-  
+  const [show , setShow] = useState(false)
+  const [show_ , setShow_] = useState(false)
 
 
   useEffect(()=>{
    
-
       getFollowingList(user.username).then((res)=>{
           setFollowing(res?.iamFollowing)
       })
@@ -39,6 +41,7 @@ function ProfileHeader({user , auth , pubs}) {
 
 
   return (
+    <>
     <div className=' d-flex flex-column align-items-center w-100 gap-1 py-4'>
 
         <div className=" w-100 d-flex flex-column justify-content-center align-items-center         flex-md-row  justify-content-md-start    gap-3 bg-inf px-2 ">
@@ -76,11 +79,11 @@ function ProfileHeader({user , auth , pubs}) {
       
 
         <div className="d-flex  borer py-2 col-12 col-lg- align-items-center justify-content-evenly">
-          <div className="d-flex  flex-column align-items-center">
-            <small className="text-secondary">Followers</small>
+          <div className="d-flex  flex-column align-items-center" onClick={()=>{ setShow(true)}} >
+            <small className="text-secondary" >Followers</small>
             <div className="text-1">{followers?.length}</div>
           </div>
-          <div className="d-flex flex-column align-items-center">
+          <div className="d-flex flex-column align-items-center" onClick={()=>{ setShow_(true)}} >
             <small className="text-secondary">Following</small>
             <div className="text-1">{following?.length}</div>
           </div>
@@ -103,6 +106,11 @@ function ProfileHeader({user , auth , pubs}) {
        </div>}
        
     </div>
+
+    <ListModal onHide={()=>setShow(false)}  show={show} list={followers} />
+    { user?.username == auth?.username &&   <ListOfFollowing onHide={()=>setShow_(false)}  show={show_}  list={following}   />}
+
+    </>
   )
 }
 
