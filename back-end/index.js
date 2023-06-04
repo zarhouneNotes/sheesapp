@@ -14,7 +14,9 @@ const app = express()
 const port = 3001
 
 
-app.use(cors())
+app.use(cors({
+    origin : ["https://sheees.onrender.com/" , "http://localhost:3000/" ]
+}))
 app.use(express.json())
 
 const Post = require('./modeles/Posts')
