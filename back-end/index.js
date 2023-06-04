@@ -14,7 +14,11 @@ const app = express()
 const port = 3001
 
 
-app.use(cors())
+app.use(cors(
+//     {
+//     origin : ["https://sheees.onrender.com/" , "http://localhost:3000/" ]
+// }
+))
 app.use(express.json())
 
 const Post = require('./modeles/Posts')
@@ -47,9 +51,11 @@ async function main (){
         try {
          if (fullname && username && email && password ) {
             db.collection('users').insertOne(user).then(()=>{
+                console.log( "user added successfully")
                   res.send({status : "ok" , message : "user added successfully"})
             }).catch(()=>{
-                res.send({status :'err' , message : 'username/email is already is use!'})  
+                res.send({status :'err' , message : 'username/email is already is use!'})
+                console.log( "somthing wrong !!")
             })
           
          }else{
@@ -233,10 +239,13 @@ app.get('/following/:username' , async (req , res)=>{
     })
     const arr = await list.toArray()
     const iamFollowing = arr.filter((user)=>{
-        return user.followers.includes(req.params.username)
+        return user.followers.includes(req.params.username) 
     })
     res.send({iamFollowing})
 })
+
+
+
 
 app.get('/publications/:username/:saved' , async (req , res)=>{
     const list  = db.collection('posts').find({
