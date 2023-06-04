@@ -14,11 +14,17 @@ const app = express()
 const port = 3001
 
 
+<<<<<<< HEAD
 app.use(cors(
 //     {
 //     origin : ["https://sheees.onrender.com/" , "http://localhost:3000/" ]
 // }
 ))
+=======
+app.use(cors({
+    origin : "https://shees.netlify.app/" 
+}))
+>>>>>>> e1b640f550d30665a5388510308d37387a44b137
 app.use(express.json())
 
 const Post = require('./modeles/Posts')
