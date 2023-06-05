@@ -17,7 +17,7 @@ const port = 3001
 
 app.use(cors(
   {
-    origin : "https://sheesapp.onrender.com/"  
+    origin : "https://sheesapp.onrender.com"  
 }
 ))
 
