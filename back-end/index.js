@@ -17,7 +17,7 @@ const port = 3001
 
 app.use(cors(
   {
-    origin : ["https://shees.netlify.app/" , "http://localhost:3000/" ]
+    origin : "https://shees.netlify.app/"  
 }
 ))
 
