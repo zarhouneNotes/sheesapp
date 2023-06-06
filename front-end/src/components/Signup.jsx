@@ -13,12 +13,11 @@ function Signup() {
     const [username, setUsername] = useState('');
     const [fullname, setFullname] = useState('');
   
-  const url = "http://localhost:3001/signup" 
   
    async  function  handleSubmit (event)  {
       event.preventDefault();
 
-    const res =await   fetch(url ,  {    
+    const res =await   fetch(`${process.env.REACT_APP_BASE_URL}/signup` ,  {    
 
         headers: {
           'Content-Type': 'application/json',

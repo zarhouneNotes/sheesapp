@@ -16,7 +16,7 @@ function Login() {
   // },[])
     async function  handleSubmit  (event) {
       event.preventDefault()
-       const res = await  fetch('http://localhost:3001/login' , {
+       const res = await  fetch(`${process.env.REACT_APP_BASE_URL}/login` , {
         method : 'POST' ,
         headers : {
           'Content-Type': 'application/json',

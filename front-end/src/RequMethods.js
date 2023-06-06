@@ -171,7 +171,11 @@ export async function getShees() {
 
 export async function getProfileShees(username , saved) {
  
+<<<<<<< HEAD
   const res = await  fetch(`${process.env.REACT_APP_BASE_URL}/publications/${username}/${saved}` , {
+=======
+  const res = await  fetch(`${process.env.REACT_APP_BASE_URL}/${username}/${saved}` , {
+>>>>>>> 3d7d31c4902a118641e4df518eea00d004f39c2f
     method : 'GET' , 
     headers: {
       'Content-Type': 'application/json',

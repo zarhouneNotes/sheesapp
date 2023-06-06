@@ -15,7 +15,15 @@ const port = 3001
 
 
 
+<<<<<<< HEAD
 app.use(cors({ origin :  ["https://sheesapp.onrender.com/" , "http://localhost:3000/" ] }))
+=======
+app.use(cors(
+  {
+    origin : "https://sheesapp.onrender.com"  
+}
+))
+>>>>>>> 3d7d31c4902a118641e4df518eea00d004f39c2f
 
 app.use(express.json())
 
