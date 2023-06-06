@@ -34,8 +34,8 @@ function Window({shees }) {
 
   return  (
    <div className='  col-12 col-lg-4 col-md-8 mx-auto'>
-{isMobile &&      <div  className=' fw-bold shee-logo text-2 text-center bg-dark  fs-5  d-flex align-items-center justify-content-center ' > Shees!</div>
-}     {/* <div  style={{width}}  /> */}
+{/* {false &&      <div  className=' fw-bold shee-logo text-2 text-center bg-dark  fs-5  d-flex align-items-center justify-content-center ' > Shees!</div>
+}     <div  style={{width}}  /> */}
      <div className={`shees-fed bg-dange `}    >
         {shees?.length ==  0 ? 
         <div className="text-center text-secondary">
