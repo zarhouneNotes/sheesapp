@@ -5,7 +5,7 @@ import { getProfileShees } from '../../RequMethods'
 import { Link } from 'react-router-dom'
 import ProfileLoad from './ProfileLoad'
 
-function ProfileBody({shees ,load,user , auth ,setSaved , setClickedShee}) {
+function ProfileBody({shees ,load,user , auth ,setSaved }) {
     const [status , setStatus] = useState(true)
     const cl = `w-100  mb- py-2 text-center text-2`
     const ac_cl =   ' text-2 border-bottom border-info fw-bold '
