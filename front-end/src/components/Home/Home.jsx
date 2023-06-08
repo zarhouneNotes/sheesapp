@@ -47,15 +47,15 @@ function Home() {
   },[])
   
   return (
-    <div className='home bg-dange d-flex justify-content-betwee' >
-      {/* <div className="tags col-">tags</div> */}
+    <div className='home bg-daner flex-column-reverse flex-lg-row d-flex flex flex  justify-content-between' >
+      
          <div className='navbarr h-10  col-lg-2 px-2'>
            <Navbar />
          </div>
       
         
 
-        <div className=' borer main-content bg-inf h-100 col-12 col-lg-10 window mx-auto  position-relative '>
+        <div className=' borer main-content bg-ifo h-100 col-12 col-lg-10 window mx-auto  position-relative '>
           <Routes>
 
             {/* <Route path='/:id'  element={ <EmptyHome  /> } /> */}
