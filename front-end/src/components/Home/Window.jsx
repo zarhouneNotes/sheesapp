@@ -47,14 +47,14 @@ function Window({shees }) {
         options={{
        pagination : false ,
        arrows : false ,
-      //  height :   '100vh',
+       height :   '100vh',
        direction :'ttb' ,
        dragable :true ,   
      }}
      
      >
       {videos?.map((post)=>{
-            return <SplideSlide   key={post?.id } className='bg- d-flex flex-coumn align-items-center  justify-content-center ' >
+            return <SplideSlide   key={post?.id } className='bg-info h-100 d-flex flex-coumn align-items-center  justify-content-center ' >
                      <Shee mute={mute} setMute={setMute} post={post} />
                     </SplideSlide>
         })

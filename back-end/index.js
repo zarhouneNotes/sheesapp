@@ -2,10 +2,8 @@ const express = require('express')
 const cors = require('cors') 
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-
 const userModel = require('./modeles/Users')
 const {MongoClient} = require('mongodb')
-// const db = client.db('mongotut')
 
 
 
@@ -15,7 +13,10 @@ const port = 3001
 
 
 
-app.use(cors({ origin :  ["https://sheesapp.onrender.com/" , "http://localhost:3000/" ] }))
+app.use(cors(
+    { origin :  ["https://sheesapp.onrender.com" , "http://localhost:3000" ] }
+    
+    ))
 
 app.use(express.json())
 
@@ -27,7 +28,7 @@ async function main (){
     const client  = new MongoClient('mongodb+srv://zarhounehoussine:zarhoune@users.avi47la.mongodb.net/gallery?retryWrites=true&w=majority')
     await client.connect()
     const db = client.db('gallery')
-    console.log('client connected')
+    console.log('client connected :p')
 
     //////////:signup
 
@@ -274,12 +275,12 @@ main()
 mongoose.connect(
     'mongodb+srv://zarhounehoussine:zarhoune@users.avi47la.mongodb.net/gallery'
    ).then(()=>{
-        console.log('Mongofb is connectted')
+        console.log('Mongodb connected ;)')
    })
 
 
 
 
 app.listen(port , ()=>{
-    console.log('server is still running..')
+    console.log('server is still running.. @_@')
 })
