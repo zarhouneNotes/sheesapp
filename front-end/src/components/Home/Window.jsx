@@ -47,7 +47,7 @@ function Window({shees }) {
         options={{
        pagination : false ,
        arrows : false ,
-       height :  isMobile ?  '88vh' : '100vh',
+       height :   '100vh',
        direction :'ttb' ,
        dragable :true ,   
      }}
