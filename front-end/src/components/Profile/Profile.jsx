@@ -20,11 +20,19 @@ function Profile() {
       setLoad(true)
       getUser(params?.id)
       .then((res)=>{
+<<<<<<< HEAD
           setUser(res.user)
           setLoad(false)
       })
       .catch(()=>{
          alert('something went wrong')
+=======
+          setUser(res?.user)
+          setLoad(false)
+      })
+      .catch(()=>{
+         console.log('something went wrong')
+>>>>>>> 47c58b6 (chat)
       })
   },[params?.id])  
 

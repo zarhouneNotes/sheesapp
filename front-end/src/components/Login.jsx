@@ -8,12 +8,22 @@ function Login() {
     const [password, setPassword] = useState('');
     const [err , setErr] = useState('')
     const navigate = useNavigate()
+<<<<<<< HEAD
   // useEffect(()=>{
     
   //   // if(localStorage.getItem('auth') ) {
   //   //   console.log(localStorage.getItem('auth'))
   //   //   navigate(`/`)}
   // },[])
+=======
+  useEffect(()=>{
+    
+    if(localStorage.getItem('auth') ) {
+      // console.log(localStorage.getItem('auth'))
+      navigate(`/`)
+  }
+  },[])
+>>>>>>> 47c58b6 (chat)
     async function  handleSubmit  (event) {
       event.preventDefault()
        const res = await  fetch(`${process.env.REACT_APP_BASE_URL}/login` , {

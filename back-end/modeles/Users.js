@@ -26,7 +26,12 @@ const userSchema = new mongoose.Schema({
     
     } , 
     followers : {type : Array} , 
+<<<<<<< HEAD
     following : {type : Array}
+=======
+    following : {type : Array} ,
+    caption : {type : String }
+>>>>>>> 47c58b6 (chat)
 })
 
 

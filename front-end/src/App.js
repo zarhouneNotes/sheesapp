@@ -9,11 +9,18 @@ import Profile from './components/Profile/Profile';
 import SearchPage from './components/Searsh/SearchPage';
 import AddPost from './components/Addvideo/AddPost';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 47c58b6 (chat)
 export const tags = ["sport" , 'football' , 'music' , 'fashion' , 'model' , 'men' , 'makeup' , 'wear' , 'clothes' , 'art' , 'beauty' , 'food' , 'cook' , "science" , "funny" , "love" , 'sad' , "nature" , "coding" , "anime" , 'movies' , "learn"]
 
 
 function App() {
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 47c58b6 (chat)
 
   return (
     <div className="App">

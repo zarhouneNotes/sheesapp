@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
+<<<<<<< HEAD
 import {AiFillHome , AiOutlineSearch , AiOutlineCloudUpload , AiOutlineUser} from 'react-icons/ai'
 import {RiLogoutBoxLine, RiUserFill} from 'react-icons/ri'
+=======
+import {AiFillHome , AiOutlineSearch , AiOutlineCloudUpload , AiOutlineUser, AiOutlineInbox} from 'react-icons/ai'
+import {RiSendPlaneFill} from 'react-icons/ri'
+>>>>>>> 47c58b6 (chat)
 import { NavLink } from 'react-router-dom'
 import { getAuth } from '../../RequMethods'
 import logo from '../../images/logo.png'
@@ -17,7 +22,11 @@ function Navbar() {
     useEffect( ()=>{
       getAuth()
       .then((res)=>{
+<<<<<<< HEAD
           setUser(res.result)
+=======
+          setUser(res?.result)
+>>>>>>> 47c58b6 (chat)
       })
       .catch(()=>{
          alert('something went wrong')
@@ -59,16 +68,35 @@ function Navbar() {
             </NavLink>
 
 
+<<<<<<< HEAD
             <NavLink to={`/user/${user?.username}`}className={({ isActive }) =>
             isActive ? classname  : activeclass
       } >
                <img src={user?.pdp} className='carre rounded-circle bg-light border border-light mx-3 '   alt="" srcset="" width="32px" />
+=======
+            <NavLink to='/inbox' className={({ isActive }) =>
+         isActive ? classname  : activeclass
+      }>
+               <RiSendPlaneFill fontSize={size}  className={icon} /> 
+               <span  >Inbox </span>   
+            </NavLink>
+
+
+            <NavLink to={`/user/${user?.username}`}className={({ isActive }) =>
+            isActive ? classname  : activeclass
+      } >
+              {   <img src={`${process.env.REACT_APP_BASE_URL}/images/${user?.pdp}`} className='carre rounded-circle bg-light border border-light mx-3 '   alt="" srcset="" width="32px" />}
+>>>>>>> 47c58b6 (chat)
                <span  >Profile</span>
             </NavLink>
 
           {!isMobile &&  
 
+<<<<<<< HEAD
           <div className="lat-item ">
+=======
+          <div className="lat-item " onClick={()=>localStorage.removeItem('auth')}>
+>>>>>>> 47c58b6 (chat)
             <div po className={'navlnk align-items-center py-2  my-2 border rounded-pill'}>
                   <IoIosLogOut   fontSize={size}  className={icon}  /> 
                   <span  >Log out  </span> 

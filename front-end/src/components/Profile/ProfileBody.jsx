@@ -28,8 +28,13 @@ function ProfileBody({shees ,load,user , auth ,setSaved }) {
   return (
     <div className=''>
         <div className="d-flex justify-content-around border-bottom">
+<<<<<<< HEAD
                 <div onClick={handelclick} className={ ` ${cl} ${status && ac_cl} `}  >Publications  </div>
                { user?.username == auth?.username && <div onClick={handelclick_}  className={ `${cl}  ${!status && ac_cl} ` }  >Saved Shees </div>}
+=======
+                <small onClick={handelclick} className={ ` ${cl} ${status && ac_cl} `}  >Publications  </small>
+               { user?.username == auth?.username && <small onClick={handelclick_}  className={ `${cl}  ${!status && ac_cl} ` }  >Saved Shees </small>}
+>>>>>>> 47c58b6 (chat)
         </div>
 
         <div className="text-cent d-flex flex-wrap bg-secodary ">
@@ -45,9 +50,15 @@ function ProfileBody({shees ,load,user , auth ,setSaved }) {
            shees?.map((post)=>{
             return <Link className={elemClass} state={post} to={`/user/${post?.username}/shees`}  >
                   
+<<<<<<< HEAD
                     <div className=" bg-dar vid"     >
                       <video className='w-100 h-100' >
                         <source src={post?.url} type='video/mp4' />
+=======
+                    <div className=" bg-dar col-8 vid"     >
+                      <video className='w-100 h-100' >
+                        <source src={`${post?.url}`} type='video/mp4' />
+>>>>>>> 47c58b6 (chat)
                       </video>
                     </div>
               

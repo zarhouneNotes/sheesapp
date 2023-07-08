@@ -5,6 +5,10 @@ import { AiFillEdit, AiOutlineCheck, AiOutlineEye, AiOutlinePlus } from 'react-i
 import { useMediaQuery } from 'usehooks-ts'
 import ListModal from './ListModal'
 import ListOfFollowing from './ListOfFollowing'
+<<<<<<< HEAD
+=======
+import { Link } from 'react-router-dom'
+>>>>>>> 47c58b6 (chat)
 
 function ProfileHeader({user , auth , pubs}) {
   const isMobile = useMediaQuery('(max-width: 900px)')
@@ -17,8 +21,13 @@ function ProfileHeader({user , auth , pubs}) {
 
 
   useEffect(()=>{
+<<<<<<< HEAD
    
       getFollowingList(user.username).then((res)=>{
+=======
+      console.log(user)
+      getFollowingList(user?.username).then((res)=>{
+>>>>>>> 47c58b6 (chat)
           setFollowing(res?.iamFollowing)
       })
   },[])
@@ -45,7 +54,11 @@ function ProfileHeader({user , auth , pubs}) {
     <div className=' d-flex flex-column align-items-center w-100 gap-1 py-4'>
 
         <div className=" w-100 d-flex flex-column justify-content-center align-items-center         flex-md-row  justify-content-md-start    gap-3 bg-inf px-2 ">
+<<<<<<< HEAD
           <img className='carre bg-info  rounded-circle' src={user?.pdp} alt="" srcset="" width='150px' />
+=======
+          <img className='carre bg-info  rounded-circle' src={ `${process.env.REACT_APP_BASE_URL}/images/${user?.pdp}`} alt="" srcset="" width='150px' />
+>>>>>>> 47c58b6 (chat)
 
           <div className='d-flex flex-column user-info bg-inf w-10'>
               <div className=" d-lg-flex align-items-lg-center bg-o justify-content-lg-between gap-4">
@@ -60,7 +73,13 @@ function ProfileHeader({user , auth , pubs}) {
                
                 }
                 { user?.username == auth?.username ?  
+<<<<<<< HEAD
                 <Button className='bg-2 w-10  px-3 rounded-pill  ' size='sm' >Edit <AiFillEdit /> </Button>
+=======
+                <Link to='/edit'  >
+                  <Button className='bg-2 w-10  px-3 rounded-pill  ' size='sm' >Edit <AiFillEdit /> </Button>
+                </Link>
+>>>>>>> 47c58b6 (chat)
                 : <div onClick={followHandel} className='w-100' >
                   {isFollowedByMe ? 
                   <Button className='bg-2 px-3 rounded-pill ' size='sm' >Following <AiOutlineCheck /> </Button> : 
@@ -73,7 +92,11 @@ function ProfileHeader({user , auth , pubs}) {
 
               <div className="text-secondary">@{user?.username}</div>
 
+<<<<<<< HEAD
               <div className="my-3 text-2"> {user?.bio ? user?.bio : 'TYPE SOMETHING HERE !!'} </div>
+=======
+              <div className="my-3 text-2"> {user?.caption ? user?.caption : 'TYPE SOMETHING HERE !!'} </div>
+>>>>>>> 47c58b6 (chat)
           </div>
         </div>
       
@@ -96,7 +119,13 @@ function ProfileHeader({user , auth , pubs}) {
      {isMobile&&   <div className="d-flex justify-content-around w-100 gap-1">
       { user?.username !== auth?.username &&  <Button className='bg-2 w-100 ' size='sm' >Check chat <AiOutlineEye /></Button>}
        { user?.username == auth?.username ?  
+<<<<<<< HEAD
        <Button className='bg-2 w-100 ' size='sm' >Edit <AiFillEdit /> </Button>
+=======
+       <Link to='/edit' className=' w-100' >
+         <Button className='bg-2   w-100' size='sm' >Edit <AiFillEdit /> </Button>
+       </Link>
+>>>>>>> 47c58b6 (chat)
        : <div onClick={followHandel} className='w-100' >
         {isFollowedByMe ? 
          <Button className='bg-2 w-100  ' size='sm' >Following <AiOutlineCheck /> </Button> : 

@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import { useMediaQuery } from "usehooks-ts"
 
 // export const isMobile = useMediaQuery('(max-width: 900px)')
+=======
+
+>>>>>>> 47c58b6 (chat)
 
 
  export async  function getAuth (){
@@ -61,6 +65,10 @@ export async  function getShee (id){
 
 
 export  async function pushLike(arr , id) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 47c58b6 (chat)
   fetch(`${process.env.REACT_APP_BASE_URL}/like/${id}`  , {
     method : 'POST' ,
     headers :{
@@ -122,16 +130,27 @@ export async function getComments (id){
 }
 
 // const [followers , setFollowers] = useState()
+<<<<<<< HEAD
 export async  function pushFollow (followers , userToFollow) {
 
+=======
+
+export async  function pushFollow (followers , userToFollow , follower) {
+   let isInList = followers?.includes(follower)
+   let arr = !isInList ? [...followers , follower]  : followers?.filter((username)=> { return   username !== follower})
+>>>>>>> 47c58b6 (chat)
   fetch(`${process.env.REACT_APP_BASE_URL}/follow/${userToFollow}`  , {
     method : 'POST' ,
     headers :{
       'Content-Type': 'application/json'
     },
     body : JSON.stringify({
+<<<<<<< HEAD
       followers : followers
       //  followers?.includes(follower)   ?  ()=>{followers?.map((username)=>{return username !== follower})} :  [...followers , follower] ,
+=======
+      followers : arr
+>>>>>>> 47c58b6 (chat)
     })
   }).then(async(res)=>{
         const response = await res.json()
@@ -167,6 +186,22 @@ export async function getShees() {
 
 }
 
+<<<<<<< HEAD
+=======
+export async function getUsers(username) {
+  // setLoad(true) 
+  const res = await  fetch(`${process.env.REACT_APP_BASE_URL}/users/${username}`, {
+    method : 'GET' , 
+    headers: {
+      'Content-Type': 'application/json',
+
+    }, 
+  })
+  const resp = await res.json()
+  return resp
+
+}
+>>>>>>> 47c58b6 (chat)
 
 
 export async function getProfileShees(username , saved) {
@@ -182,3 +217,110 @@ export async function getProfileShees(username , saved) {
   return resp
 
 }
+<<<<<<< HEAD
+=======
+
+
+export async  function updateProfileHandel (username , key , value) {
+
+  fetch(`${process.env.REACT_APP_BASE_URL}/update/${username}/${key}`  , {
+    method : 'POST' ,
+    headers :{
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify({
+      newvalue : value
+    })
+  }).then(async(res)=>{
+        const response = await res.json()
+        console.log(response)
+  })
+}
+
+
+export function chatIdGen(a, b ){
+  return a>b ? a+b : b+a
+}
+
+export async function sendMessage (chatId , members , message){
+  fetch(`${process.env.REACT_APP_BASE_URL}/send-message`  , {
+    method : 'POST' ,
+    headers :{
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify({
+      chatId, members , message
+
+    })
+  }).then(async(res)=>{
+        const response = await res.json()
+        console.log(response)
+  })
+}
+
+
+
+export async function getChats(username){
+
+    const response =  await fetch(`${process.env.REACT_APP_BASE_URL}/chats/${username}` , {
+      method :'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+     })
+  const res  =await response.json()
+  return res
+}
+
+export async function getChat(chatId){
+
+  const response =  await fetch(`${process.env.REACT_APP_BASE_URL}/chat/${chatId}` , {
+    method :'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+   })
+const res  =await response.json()
+return res
+}
+
+
+export async function CreateChat (chatId , members ){
+  fetch(`${process.env.REACT_APP_BASE_URL}/create-chat`  , {
+    method : 'POST' ,
+    headers :{
+      'Content-Type': 'application/json'
+    },
+    body : JSON.stringify({
+      chatId, members 
+
+    })
+  }).then(async(res)=>{
+        const response = await res.json()
+        console.log(response)
+  })
+}
+
+
+
+export function timeAgo(input) {
+  const date = (input instanceof Date) ? input : new Date(input);
+  const formatter = new Intl.RelativeTimeFormat('en');
+  const ranges = {
+    years: 3600 * 24 * 365,
+    months: 3600 * 24 * 30,
+    weeks: 3600 * 24 * 7,
+    days: 3600 * 24,
+    hours: 3600,
+    minutes: 60,
+    seconds: 1
+  };
+  const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+  for (let key in ranges) {
+    if (ranges[key] < Math.abs(secondsElapsed)) {
+      const delta = secondsElapsed / ranges[key];
+      return formatter.format(Math.round(delta), key);
+    }
+  }
+}
+>>>>>>> 47c58b6 (chat)
