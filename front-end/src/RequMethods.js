@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import { useMediaQuery } from "usehooks-ts"
-
-// export const isMobile = useMediaQuery('(max-width: 900px)')
-=======
-
->>>>>>> 47c58b6 (chat)
 
 
  export async  function getAuth (){
@@ -65,10 +58,6 @@ export async  function getShee (id){
 
 
 export  async function pushLike(arr , id) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 47c58b6 (chat)
   fetch(`${process.env.REACT_APP_BASE_URL}/like/${id}`  , {
     method : 'POST' ,
     headers :{
@@ -130,27 +119,17 @@ export async function getComments (id){
 }
 
 // const [followers , setFollowers] = useState()
-<<<<<<< HEAD
-export async  function pushFollow (followers , userToFollow) {
-
-=======
 
 export async  function pushFollow (followers , userToFollow , follower) {
    let isInList = followers?.includes(follower)
    let arr = !isInList ? [...followers , follower]  : followers?.filter((username)=> { return   username !== follower})
->>>>>>> 47c58b6 (chat)
   fetch(`${process.env.REACT_APP_BASE_URL}/follow/${userToFollow}`  , {
     method : 'POST' ,
     headers :{
       'Content-Type': 'application/json'
     },
     body : JSON.stringify({
-<<<<<<< HEAD
-      followers : followers
-      //  followers?.includes(follower)   ?  ()=>{followers?.map((username)=>{return username !== follower})} :  [...followers , follower] ,
-=======
       followers : arr
->>>>>>> 47c58b6 (chat)
     })
   }).then(async(res)=>{
         const response = await res.json()
@@ -186,8 +165,6 @@ export async function getShees() {
 
 }
 
-<<<<<<< HEAD
-=======
 export async function getUsers(username) {
   // setLoad(true) 
   const res = await  fetch(`${process.env.REACT_APP_BASE_URL}/users/${username}`, {
@@ -201,7 +178,6 @@ export async function getUsers(username) {
   return resp
 
 }
->>>>>>> 47c58b6 (chat)
 
 
 export async function getProfileShees(username , saved) {
@@ -217,8 +193,6 @@ export async function getProfileShees(username , saved) {
   return resp
 
 }
-<<<<<<< HEAD
-=======
 
 
 export async  function updateProfileHandel (username , key , value) {
@@ -323,4 +297,3 @@ export function timeAgo(input) {
     }
   }
 }
->>>>>>> 47c58b6 (chat)

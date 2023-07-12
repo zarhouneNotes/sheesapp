@@ -47,7 +47,7 @@ function UsersList({label}) {
         
         {list?.map((user)=>{
             CreateChat(chatIdGen(auth?.username , user?.username) , [auth?.username , user?.username])
-            return  <SheePoster user={auth} poster={user} isFollowedByMe={user?.followers?.includes(auth?.username)} followHandel={()=>{pushFollow(user?.followers , user?.username , auth?.username)}} />
+            return  <SheePoster key={user?.username} user={auth} poster={user} isFollowedByMe={user?.followers?.includes(auth?.username)} followHandel={()=>{pushFollow(user?.followers , user?.username , auth?.username)}} />
         })}
     </div>
   )

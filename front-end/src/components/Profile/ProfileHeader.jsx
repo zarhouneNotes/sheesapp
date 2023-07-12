@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { getAuth, getFollowingList, pushFollow } from '../../RequMethods'
+import { chatIdGen, getAuth, getFollowingList, pushFollow } from '../../RequMethods'
 import { Button } from 'react-bootstrap'
 import { AiFillEdit, AiOutlineCheck, AiOutlineEye, AiOutlinePlus } from 'react-icons/ai'
 import { useMediaQuery } from 'usehooks-ts'
 import ListModal from './ListModal'
 import ListOfFollowing from './ListOfFollowing'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function ProfileHeader({user , auth , pubs}) {
   const isMobile = useMediaQuery('(max-width: 900px)')
  
-
+  const navigate = useNavigate()
   const [followers , setFollowers] =useState(user?.followers)
   const [following, setFollowing] = useState([])
   const [show , setShow] = useState(false)
@@ -46,7 +46,7 @@ function ProfileHeader({user , auth , pubs}) {
     <div className=' d-flex flex-column align-items-center w-100 gap-1 py-4'>
 
         <div className=" w-100 d-flex flex-column justify-content-center align-items-center         flex-md-row  justify-content-md-start    gap-3 bg-inf px-2 ">
-          <img className='carre bg-info  rounded-circle' src={ `${process.env.REACT_APP_BASE_URL}/images/${user?.pdp}`} alt="" srcset="" width='150px' />
+          <img className='carre border  rounded-circle' src={ `${process.env.REACT_APP_BASE_URL}/images/${user?.pdp}`} alt="" srcset="" width='150px' />
 
           <div className='d-flex flex-column user-info bg-inf w-10'>
               <div className=" d-lg-flex align-items-lg-center bg-o justify-content-lg-between gap-4">
@@ -97,7 +97,7 @@ function ProfileHeader({user , auth , pubs}) {
         </div>
         {/* {!isMobile && <hr className='text-secondar' />} */}
      {isMobile&&   <div className="d-flex justify-content-around w-100 gap-1">
-      { user?.username !== auth?.username &&  <Button className='bg-2 w-100 ' size='sm' >Check chat <AiOutlineEye /></Button>}
+      { user?.username !== auth?.username &&  <Button className='bg-2 w-100 ' size='sm' onClick={()=>{navigate(`/inbox/${chatIdGen(user?.username , auth?.username)}`)}} >message <AiOutlineEye /></Button>}
        { user?.username == auth?.username ?  
        <Link to='/edit' className=' w-100' >
          <Button className='bg-2   w-100' size='sm' >Edit <AiFillEdit /> </Button>

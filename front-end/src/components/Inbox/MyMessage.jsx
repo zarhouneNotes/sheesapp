@@ -1,12 +1,26 @@
 import styled from '@emotion/styled'
 import { Box , Stack, Typography } from '@mui/material'
 import { teal } from '@mui/material/colors'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { timeAgo } from '../../RequMethods'
+import { getShee, timeAgo } from '../../RequMethods'
 
 
 function   Message({authIsTheSender , message}) {
+    const [shee , setShee] = useState()
+    const [load , setLoad] = useState(true)
+  useEffect(()=>{
+    if(message?.url && message?.url?.length >0 ){
+      getShee(message?.url)
+      .then((res)=>{
+        setShee(res.shee)
+        // console.log(shee.url)
+      })
+      .finally(()=>{
+        setLoad(false)
+      })
+  }},[])
+  var post = shee
   return    (
 
 
@@ -31,14 +45,20 @@ function   Message({authIsTheSender , message}) {
         </Stack> }
     </Stack>
 
-    <Stack  direction='row'm={1} justifyContent={ authIsTheSender ? 'end' :  'start'}  >
+    <Stack  direction='row'm={1} justifyContent={ authIsTheSender ? 'end' :  'start'} className='bg-ino' >
     { message?.url &&  
-            <Stack className=" bg-dar col-2 vid"  direction={authIsTheSender ?  'row-reverse' : 'row' }alignItems='center' gap={1}   >
-              <video className='w-100 h-100'  style={{borderRadius :'20px'}} >
-                <source src={`${message?.url}`} type='video/mp4' />
-              </video>
+           
+            <Stack className=" bg-dar col-12  bg-warnng "  direction={authIsTheSender ?  'row-reverse' : 'row' }alignItems='center'   gap={1}  
+             >
+              {load ?  <>loadin..</>  :
+               <Link className='link col-3 col-md-2 ' state={post} to={'/'}>
+               <video className='w-100 h-100'  style={{borderRadius :'20px'}} >
+                 <source src={`${shee?.url}`} type='video/mp4' />
+               </video>
+               </Link>}
               <Typography variant='caption'  color='grey' > {timeAgo(message?.time)} </Typography> 
             </Stack>
+         
      
         }
     </Stack>
@@ -66,4 +86,14 @@ const OtherMessage = styled(Stack)({
     borderRadius :'15px',
     borderTopLeftRadius :'0'
 
+})
+
+
+const SheeDetails = styled(Box)({
+  display : 'flex',
+  flexDirection : 'column',
+  justifyContent : 'space-between',
+  position :'absolute' ,
+  width :'100%',
+  height :'100%'
 })

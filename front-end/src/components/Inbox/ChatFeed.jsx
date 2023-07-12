@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import useFetch from './useFetch'
 import { AppContext } from '../Home/Home'
 import { chatIdGen, getChat, getUser, sendMessage } from '../../RequMethods'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { Box, Button, Stack, Typography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,9 +14,9 @@ import { Form } from 'react-bootstrap'
 import ProfileLoad from '../Profile/ProfileLoad'
 
 
-function ChatFeed({}) {
-  const {auth} = useContext(AppContext)
-  const {socket} = useContext(AppContext)
+function ChatFeed({defineActiveChatBox}) {
+  const {auth  , socket , isMobile} = useContext(AppContext)
+  const navigate = useNavigate()
   const params = useParams()
   const [chat , setChat] = useState()
   const [messages , setMessages] = useState()
@@ -35,14 +35,15 @@ useEffect(()=>{
       .then((res)=>{
         setChat(res.data)
         setMessages(res?.data?.messages)
-
+        defineActiveChatBox(res.data?.chatId)
         const friend_id = res.data?.members[0] == auth?.username ? res.data?.members[1] : res.data?.members[0]
         getUser(friend_id)
         .then((user)=>{
-          emptyElement.current?.scrollIntoView({})
+          
           setFriend(user?.user)
         })
         .finally(()=>{
+          emptyElement.current?.scrollIntoView({})
           setLoad(false)
         })
       })
@@ -50,73 +51,65 @@ useEffect(()=>{
     return ()=>{
       controller.abort()
     }
-},[params])
+},[params?.chat_id  ])
 
 
 
-
-
-
-///////////// receeieve instant message
 
 
 
 
 
 function sendHandel (e){ 
-  e.preventDefault()
-  let message  = {
-    isShee  : false, 
-    time :Date.now(),
-    sender : auth?.username
-  
-  }
-  message.content = msgInput.current.value
-  if (msgInput.current.value.length >0 && msgInput.current.value) {
-    setMessages([...messages , message])
-   sendMessage(
-    chat?.chatId ,
-    chat?.members ,
-    message
-   ).then(()=>{
-    msgInput.current.value = ''
-   })
-  }
-   
-   //////////::: to socket
-  socket.emit('send-message' , {message  , friend_id : friend?.username  })
+      const message  = {
+        isShee  : false, 
+        time :Date.now(),
+        sender : auth?.username
+    } 
+      e.preventDefault()
+    
+      message.content = msgInput.current.value
+      if (msgInput.current.value.length >0 && msgInput.current.value) {
+        setMessages([...messages , message])
+        sendMessage(
+          chat?.chatId ,
+          chat?.members ,
+          message
+        ).then(()=>{
+          msgInput.current.value = ''
+        })
+      }
+      //////////
+      socket.current.emit('send-message' , {message , username : friend?.username})
 
 }
+///////////// receeieve instant message
 
-////////// receive msg from socket
 useEffect(()=>{
-  if (socket) {
-    socket.on("receive-message" , (message)=>{
-      // console.log(message)
-      if(params?.chat_id === chatIdGen(message?.sender , auth?.username)) 
-       {setMessages(list =>[...list , message])}
-    })
-  }
+  socket.current?.on('receive-message' , (message)=>{
+    if (chatIdGen(auth?.username ,message.sender) === chat?.chatId ) {
+     setMessages((prev)=>[...prev , message])
+    } 
+  })
 
-},[socket , chat])
+},[socket])
+
+
+
 
 useEffect(()=>{
   emptyElement.current?.scrollIntoView({
- 
   })
 },[messages])
-useEffect(()=>{
-  emptyElement.current?.scrollIntoView({
-    behavior : 'smooth'
-  })
-},[])
+
+
 
 
  
   return load ? <ProfileLoad /> : (
-    <Stack  direction='column' className='h-100 col-12 col-md-8 bg-sucess' borderLeft='1px solid teal'>
+    <Stack  height={'100%' } direction='column' className=' col-12 col-md-8 bg-sucess ' borderLeft='1px solid teal'>
         <Stack direction='row' color={'white'}  justifyContent='space-between' p={2} bgcolor={teal[500]} alignItems='center' >
-          <Stack direction='row' alignItems='center' gap={1} >
+          <Stack direction='row' alignItems='center' gap={1}  onClick={()=>{navigate(`/user/${friend?.username}`)}}>
             <img src={`${process.env.REACT_APP_BASE_URL}/images/${friend?.pdp}`} alt="" srcset="" width='40px' className='carre rounded-circle' />
             <Stack direction="column" >
             <Typography variant='subtitle2' >{friend?.fullname}</Typography>
@@ -124,10 +117,12 @@ useEffect(()=>{
             </Stack>
 
           </Stack>
-          <CloseIcon />
+          <Box onClick={()=>{navigate('/inbox')}} >
+           <CloseIcon  />
+          </Box>
         </Stack>
         {/* ////////////////////// */}
-        <Box height='85vh'  bgcolor='blueiolet'  overflow='scroll'     >
+        <Box  bgcolor='blueiolet' height={'100%'}  overflow='scroll'     >
 
          {messages?.map((msg)=>{
           return  (msg?.content.length>0 ||msg?.url )  && <Message key={msg?.time} message={msg} authIsTheSender={msg?.sender == auth?.username}  />
@@ -141,8 +136,8 @@ useEffect(()=>{
         </Box>
 
         {/* ////////////// */}
-        <Form onSubmit={sendHandel}>
-          <Stack m={1} direction='row' bgcolor='white' border='1px solid teal' >
+        <Form onSubmit={sendHandel} className='p-1'>
+          <Stack  direction='row' bgcolor='white' border='1px solid teal' >
             <input   ref={msgInput}  placeholder='write a message..' className='border-0'  />
             <Button type='submit' variant='' onClick={sendHandel}>Send</Button>
           </Stack>

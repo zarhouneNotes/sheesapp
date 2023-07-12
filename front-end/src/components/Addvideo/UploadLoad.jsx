@@ -12,22 +12,14 @@ function UploadLoad({progress}) {
          <div  style={{transform : 'rotate(90deg)'}}>
             <BarLoader color="#36d7b7"  />
         </div> 
-<<<<<<< HEAD
-        <div className="text-white -1 ">Uploding.. {progress}%</div>
-=======
         <div className="text-white -1 ">Uploding.. </div>
->>>>>>> 47c58b6 (chat)
         <div  style={{transform : 'rotate(90deg)'}}>
             <BarLoader color="#36d7b7"  />
         </div> 
      </div>
     <BarLoader color="#36d7b7" />
     </div>
-<<<<<<< HEAD
-    { progress ==   100 &&  <Link to='/' className='text-white  '> <small className='d-flex gap-2 align-items-center' ><span>Back home</span>  <RiArrowRightLine/> </small>    </Link>}
-=======
     {/* { progress ==   100 &&  <Link to='/' className='text-white  '> <small className='d-flex gap-2 align-items-center' ><span>Back home</span>  <RiArrowRightLine/> </small>    </Link>} */}
->>>>>>> 47c58b6 (chat)
     </div>
   )
 }

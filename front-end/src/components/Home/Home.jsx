@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import Window from './Window'
 import './home.css'
 import Profile from '../Profile/Profile'
@@ -11,12 +11,13 @@ import SheeLoad from './SheeLoad'
 import EditProfile from '../Profile/EditProfile'
 import Inbox from '../Inbox/Inbox'
 import io from 'socket.io-client'
+import { useMediaQuery } from 'usehooks-ts'
 
 
-
+// const socket = io.connect(process.env.REACT_APP_BASE_URL)
 export const AppContext = createContext()
 function Home() {
-  
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const navigate = useNavigate()
   const params = useParams()
 
@@ -24,8 +25,8 @@ function Home() {
   const [shees , setShees] = useState([])
   const [auth , setAuth] =  useState()
   const [onlineUsers , setOnlineUers] = useState([])
-  const [socket , setSocket] = useState()
-
+  // const [socket , setSocket] = useState()
+  const socket = useRef(io(process.env.REACT_APP_BASE_URL))
 
     
    useEffect(()=>{
@@ -33,19 +34,15 @@ function Home() {
     .then((res)=>{
       setAuth(res.result)
     })
-    
+ 
     getShees().then((res)=>{
       setShees([...res?.shees]) 
       setLoad(false) 
     })
+    // return ()=> socket.close() 
    },[])
 
 
-
-   
- 
-
-  
 
   function LogOut (e){
     e.preventDefault()
@@ -54,33 +51,30 @@ function Home() {
   }
 
   useEffect(()=>{
-
-    if (! localStorage.getItem('auth')) navigate('/login') 
+    if (! localStorage.getItem('auth')) {
+      navigate('/login')
+      socket.current?.close()     
+     }
     
   },[params])
 
 
   useEffect(()=>{
-    if (auth) {
-      const s =  io(process.env.REACT_APP_BASE_URL , {
-        query : {id : auth?.username}
-      }) 
-      setSocket(s)
-      return ()=>{
-      s.disconnect()
-      }
-    }
-    
-    return ()=>{
-      socket?.disconnect()
-      }
+    auth && socket.current.emit('addUser' , auth?.username)   
+    socket.current.on('getUsers' , (users)=>{
+      setOnlineUers(users)
+      console.log(users)
+    })
   },[auth])
-  
-  return (
-    <AppContext.Provider value={{auth : auth ? auth : null , socket}}>
+
+
 
   
-    <div className='home bg-daner flex-column-reverse flex-lg-row d-flex flex flex  justify-content-between' >
+  return (
+    <AppContext.Provider value={{auth , socket , isMobile}}>
+
+  
+    <div className='home bg-danr flex-column-reverse flex-lg-row d-flex   justify-content-between' >
       
          <div className='navbarr h-10  col-lg-2 px-2'>
            <Navbar />
@@ -88,7 +82,7 @@ function Home() {
       
         
 
-        <div className=' borer main-content bg-fo h-10 col-12 col-lg-10 window mx-auto  position-relative '>
+        <div className=' borer main-content bg-io h-10 col-12 col-lg-10 window mx-auto  position-relative '>
           <Routes>
 
             <Route path='/'  element={ load ? <SheeLoad /> :   <Window shees={shees} />  } />

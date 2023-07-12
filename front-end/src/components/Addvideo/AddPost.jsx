@@ -6,23 +6,6 @@ import Tag from '../Home/Tag'
 import { tags } from '../../App'
 import axios from 'axios'
 import { addVideo, getAuth } from '../../RequMethods'
-<<<<<<< HEAD
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage'
-import { storage } from '../../Firebase'
-import { Link, useNavigate } from 'react-router-dom'
-import UploadLoad from './UploadLoad'
-import uniqid from 'uniqid';
-
-function AddPost() {
-  const cancelUploadBtn = document.getElementsByClassName('')
-  const [progress, setProgress] = useState(0);
-  const [videoToUp , setVideotoUp] = useState()
-  // const [caption , setCaption] = useState('')
-  const [username , setUsername ] = useState('')
-  const [pdp , setPdp] = useState('')
-  const [err , setErr] = useState('')
-  const inputRef = useRef(null);
-=======
 
 import { Link, useNavigate } from 'react-router-dom'
 import UploadLoad from './UploadLoad'
@@ -37,16 +20,11 @@ function AddPost() {
 
   const [err , setErr] = useState('')
   const inputRef = useRef('');
->>>>>>> 47c58b6 (chat)
   const vidRef = useRef()
   const navigate = useNavigate()
 
    var tgs = []
-<<<<<<< HEAD
-  const cancelHandel = ()=> {setVideotoUp() ; setProgress(0)}
-=======
   const cancelHandel = ()=> {setVideotoUp() ; setProgress()}
->>>>>>> 47c58b6 (chat)
   
  
   const TagClick = (tag) =>{
@@ -74,13 +52,6 @@ function AddPost() {
     
   },[])
 
-<<<<<<< HEAD
-const uid = uniqid().toString()
- async function uploadVideo (){
-  ///:upload to firebaseee
-    const fileRef =    ref(storage ,uid)
-    const upload  =  uploadBytesResumable(fileRef , videoToUp).then((res)=>{
-=======
 
  async function uploadVideo (){
   // setProgress(true)
@@ -109,38 +80,21 @@ const uid = uniqid().toString()
   ///:upload to firebaseee
     const fileRef =    ref(storage ,uniqid())
     uploadBytesResumable(fileRef , videoToUp).then((res)=>{
->>>>>>> 47c58b6 (chat)
       console.log(res)
 
       getDownloadURL(fileRef).then((URL_)=>{
         if(!URL_){setErr('Uploading failed')}
-<<<<<<< HEAD
-         fetch  (`${process.env.BASE_URL}/add-video` ,{
-=======
          fetch  (`${process.env.REACT_APP_BASE_URL}/add-video` ,{
->>>>>>> 47c58b6 (chat)
           method : 'POST' , 
           headers: {
             'Content-Type': 'application/json',
           },
-<<<<<<< HEAD
-          body : JSON.stringify( {
-            id : uniqid() ,
-            url : URL_ ,
-            caption : inputRef.current.value,
-            tags : tgs ,
-            likers : [] ,
-            savers : [] ,
-            username : username
-            
-=======
           body : JSON.stringify({
             username : username ,
             id : uniqid(),
             caption : inputRef.current.value ,
             tags : tgs ,
             url : URL_
->>>>>>> 47c58b6 (chat)
           })
         }).then((res)=>{
           const data =  res.json()
@@ -148,7 +102,7 @@ const uid = uniqid().toString()
           if (data.status === 'err')
              {setErr('Something went wrong') }
              else {
-              console.log('perfeecto')
+              navigate('/')
              }
          
         })
@@ -164,21 +118,9 @@ const uid = uniqid().toString()
 
   return (
     <div className=' col-12 col-lg-10 mx-auto bg-dange add-video borde'>    
-<<<<<<< HEAD
-   {  progress >0  &&
-    <div className="position-absolute p-2 bg-1 w-100 d-flex justify-content-center align-items-center  bg-drk" style={{zIndex : "99" , height:'100vh'}} >
-     
-      
-      <UploadLoad   progress={progress}  /> 
-     
-
-    
-
-=======
    {  progress  &&
     <div className="position-absolute p-2 bg-1 w-100 d-flex justify-content-center align-items-center  bg-drk" style={{zIndex : "99" , height:'100vh'}} >   
       <UploadLoad    /> 
->>>>>>> 47c58b6 (chat)
     </div> 
     }
    

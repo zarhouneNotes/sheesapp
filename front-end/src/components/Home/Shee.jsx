@@ -16,25 +16,18 @@ import { Form } from 'react-bootstrap';
 import { getAuth, getComments, getUser, pushComment, pushFollow, pushLike, pushSave  } from '../../RequMethods';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-=======
 import SendIcon from '@mui/icons-material/Send';
 import { Link } from 'react-router-dom';
 import SheePoster from './SheePoster';
 import { BsSend } from 'react-icons/bs';
 import ShareToList from './ShareToList';
->>>>>>> 47c58b6 (chat)
 
 
 
 function Shee({  post   , mute , setMute  }) {
    const [play , setPlay] = useState(true)
    const [open , setOpen] = useState(false)
-<<<<<<< HEAD
-=======
    const [show  , setShow] = useState(false)
->>>>>>> 47c58b6 (chat)
    const [user , setUser] = useState({})
    const [poster , setPoster] = useState({})
    const ref = useRef()
@@ -98,26 +91,16 @@ useEffect(()=>{
 
 const isFollowedByMe = followers?.includes(user?.username)
 const followHandel = ()=>{
-<<<<<<< HEAD
-  if (!isFollowedByMe) {
-    setFollowers([...followers, user?.username])
-    pushFollow([...followers, user?.username] , poster?.username)
-=======
   pushFollow(followers , poster?.username,user?.username)
   if (!isFollowedByMe) {
     setFollowers([...followers, user?.username])
     // pushFollow([...followers, user?.username] , poster?.username)
->>>>>>> 47c58b6 (chat)
   }else{
       const arr = followers?.filter((id)=>{
         return id !== user.username
       })
       setFollowers(arr)
-<<<<<<< HEAD
-      pushFollow(arr ,poster?.username )
-=======
       // pushFollow(arr ,poster?.username )
->>>>>>> 47c58b6 (chat)
   }
   
 }
@@ -135,19 +118,12 @@ function  commentHandel  (e){
 if (commentRef.current.value.length>0) {
   setComments([...comments , c])
   pushComment(c)
-<<<<<<< HEAD
-=======
   commentRef.current.value = ''
->>>>>>> 47c58b6 (chat)
 }
 }
 /////////////////////////////////////////////////////////Like handell
 
-<<<<<<< HEAD
-  const isLikedByMe  =likers?.includes(user.username)
-=======
   const isLikedByMe  =likers?.includes(user?.username)
->>>>>>> 47c58b6 (chat)
 function likeHandel (){
   const id = user.username
   if (!likers?.includes(id)) {
@@ -167,11 +143,7 @@ function likeHandel (){
 
 /////////////////////////////////////////////////////////  Save handeol
 
-<<<<<<< HEAD
-const isSavedByMe = savers?.includes(user.username)
-=======
 const isSavedByMe = savers?.includes(user?.username)
->>>>>>> 47c58b6 (chat)
 function saveHandel (){
   const id = user.username
   if (!savers?.includes(id)) {
@@ -218,20 +190,12 @@ const size = 'medium'
   return (
     <>
    
-<<<<<<< HEAD
-    <div className="shee d-fle x justify-content-center align-items-center  "ref={ref}  onDoubleClick={likeHandel} >
-=======
     <div className="shee col-  d-fle x justify-content-center align-items-center position-relative  "ref={ref}  onDoubleClick={likeHandel} >
->>>>>>> 47c58b6 (chat)
       <div   className="  bg-dan  position-relative  window "       >
 
          
         <video style={{aspectRatio : '9/16'}} className='videoTag bg-drk'  ref={vidRef} autoPlay={false} loop muted={mute}  >
-<<<<<<< HEAD
-          <source src={post?.url} type='video/mp4' />
-=======
           <source src={ `${post?.url}`} type='video/mp4' />
->>>>>>> 47c58b6 (chat)
         </video>
        
           <div className=" p position-absolute onshee bg-succes d-flex w-100 h-100  " >
@@ -252,23 +216,6 @@ const size = 'medium'
                 </div>
             </div>
           <div className='align-self-end bg-dange d-flex h-10  justify-content-between w-100 position-relative bg-ino' >
-<<<<<<< HEAD
-              <div className='align-self-end text-light d-flex align-items-center gap-2 p-2' >
-
-                <Link className='d-flex align-items-center link gap-1'  to={`/user/${poster?.username}`} >
-                  <img width='40px' className='rounded-circle carre' src={poster?.pdp} alt="" srcset="" />
-                    <div>{post?.username}</div>
-                </Link>
-
-                { user.username !== post.username && 
-              <div  onClick={followHandel}>
-                  { !isFollowedByMe ?<small  className="text-secondary   mx-1 ">Follow</small>
-                   :  <small  className="tex   mx-1 text-2">Following</small>
-                  }
-                </div>
-                }
-                </div>
-=======
             <div className='align-self-end text-light'>
           
             <SheePoster  isFollowedByMe={isFollowedByMe} followHandel={followHandel} poster={poster} user={user}   />
@@ -278,53 +225,29 @@ const size = 'medium'
                       </small>
                     </div>
             </div>
->>>>>>> 47c58b6 (chat)
             
               
             <div className=' control-btns bg-dr text-light d-flex  py-2 '>
                 
 
                   <div className="reacts d-flex flex-column  align-self-end mb- gap-4 px-2">
-<<<<<<< HEAD
-                      <div className="react-btn   "> 
-                          <div onClick={saveHandel}> 
-                          {isSavedByMe ?
-                            <BookmarkIcon fontSize={size}  className='text-whi'/> :
-                           <TurnedInNotOutlinedIcon  fontSize={size}   /> }
-                          </div>
-                          <small>Save</small>
-                      </div>
-=======
                       
 
 
->>>>>>> 47c58b6 (chat)
                       <div className="react-btn  "  > 
                        <div onClick={likeHandel} >
                        {!isLikedByMe ? 
                         <FavoriteBorderOutlinedIcon fontSize={size}  /> 
-<<<<<<< HEAD
-                         : <FavoriteIcon  fontSize={size}  className='text-'   />
-                      }
-                       </div>
-                          
-                        
-                          <small>{likers?.length}</small>
-                      </div>
-=======
                          : <FavoriteIcon style={{ scale :'1.1'}}    fontSize={size}  className='text-danger'   />
                       }
                        </div>
                           <small>{likers?.length}</small>
                       </div>
 
->>>>>>> 47c58b6 (chat)
                       <div className="react-btn  " onClick={()=>setOpen(true)} > 
                           <ChatBubbleOutlineOutlinedIcon  fontSize={size}   /> 
                           <small>{comments.length}</small>
                       </div>
-<<<<<<< HEAD
-=======
                 
                       <div className="react-btn  "  onClick={()=>setShow(true)}   style={{transform : 'rotate(-45deg)'}}> 
                           <SendIcon  fontSize={size}   /> 
@@ -341,7 +264,6 @@ const size = 'medium'
 
                       
 
->>>>>>> 47c58b6 (chat)
                       <div className="react-btn  "> 
                           <MoreHorizOutlinedIcon  fontSize={size}   /> 
                       </div>
@@ -357,11 +279,7 @@ const size = 'medium'
     </div>
 
 
-<<<<<<< HEAD
-    <div className=' px- comment-area position-absolute d-flex flex-column justify-content-between ' style={{scale : open ?   '1' : '0'}}>
-=======
  { open &&     <div className=' px- comment-area position-absolute d-flex flex-column justify-content-between ' >
->>>>>>> 47c58b6 (chat)
         <div className='d-flex p-3 border-bottom  text- justify-content-between align-items-center'>
             <div>Comments</div>
             <IoMdClose fontSize='20px'  onClick={()=>setOpen(false)}    />
@@ -385,13 +303,12 @@ const size = 'medium'
                 
             </Form>
         
-<<<<<<< HEAD
-    </div>
-=======
+
     </div>}
 
-    <ShareToList auth={user} onHide={()=>setShow(false)} url ={post?.url}  show={show}  />
->>>>>>> 47c58b6 (chat)
+
+    <ShareToList auth={user} onHide={()=>setShow(false)} url ={post?.id}  show={show}  />
+
   </>
     
   )

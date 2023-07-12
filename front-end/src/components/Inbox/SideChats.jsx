@@ -7,7 +7,7 @@ import { AppContext } from '../Home/Home'
 import { teal } from '@mui/material/colors'
 import { Link, useNavigate } from 'react-router-dom'
 
-function SideChats({chats}) {
+function SideChats({chats , activeChat}) {
   const navigate = useNavigate()
   const [users , setUsers] = useState()
   const {auth} = useContext(AppContext)
@@ -23,19 +23,20 @@ function SideChats({chats}) {
   return (
     <Box className='col-12 col-md-4 bg-warnin ' overflow='scroll'  maxHeight='100vh' >
       <Typography variant='h5' p={1} className='text-1 border-bottom'  >Chats</Typography>
-{chats?.some((chat)=> chat?.messages?.length === 0) &&     
-<Stack direction='row' alignItems='start' padding={1} overflow="scroll">
+    {chats?.some((chat)=> chat.messages?.length === 0 ) 
+    &&     
+    <Stack className='bg-i"fo ' direction='row' alignItems='center' padding={1} overflow="scroll">
       {   users?.map((user)=>{
+
+        const conv = chats?.find((chat)=>  chat.chatId === chatIdGen(auth?.username , user?.username) )
           
-          return chats?.some((chat)=> 
-                     chat.chatId === chatIdGen(auth?.username , user?.username) 
-                  && user.username !== auth?.username
-                  && chat?.messages.length ===0 
-                             ) 
-                  
+          return  user.username !== auth?.username
+                  && conv?.messages.length ===0 
+                             
+      
                   &&
                 
-                   <Stack   direction='column' alignItems='center' sx={{margin :1}} 
+                   <Stack key={user?.username} direction='column' alignItems='center' sx={{margin :1}} 
 
                    onClick={async()=>{
                    navigate(`/inbox/${chatIdGen(auth?.username , user?.username) }`)
@@ -55,7 +56,7 @@ function SideChats({chats}) {
       </Stack>}
 
             {/* <hr /> */}
-        {chats?.map((chat)=> chat?.messages.length >0 && <ChatItem key={chat?.chatId} chat={chat} />
+        {chats?.map((chat)=> chat?.messages?.length >0 && <ChatItem key={chat?.chatId} activeChat={activeChat} chat={chat} />
         )}
         
     </Box>

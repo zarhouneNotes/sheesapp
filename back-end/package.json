@@ -1,20 +1,11 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-<<<<<<< HEAD
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "build" : "npm install"       
-=======
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
     "build": "npm install"
->>>>>>> 47c58b6 (chat)
   },
   "keywords": [],
   "author": "",
@@ -24,22 +15,14 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-<<<<<<< HEAD
-=======
     "gridfs-stream": "^1.1.1",
->>>>>>> 47c58b6 (chat)
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.3.0",
     "mongoose": "^7.0.3",
-<<<<<<< HEAD
-    "multer": "^1.4.5-lts.1"
-  }
-=======
     "multer": "^1.4.5-lts.1",
     "multer-gridfs-storage": "^5.0.2",
     "socket.io": "^4.7.0"
   },
   "description": ""
->>>>>>> 47c58b6 (chat)
 }

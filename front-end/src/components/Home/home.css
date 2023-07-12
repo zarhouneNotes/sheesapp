@@ -5,10 +5,7 @@
 }
 .carre{
     aspect-ratio: 1/1;
-<<<<<<< HEAD
-=======
     object-fit: contain;
->>>>>>> 47c58b6 (chat)
 }
 .window{
     display: flex;
@@ -163,11 +160,7 @@ height: 6vh;
 
 .comment-area{
     background-color: rgb(252, 252, 252);
-<<<<<<< HEAD
-    bottom: 0px;
-=======
     bottom: 1vh;
->>>>>>> 47c58b6 (chat)
     width: 100%;
     height: 90vh;
     /* min-height: 30vh; */
@@ -253,10 +246,7 @@ height: 6vh;
  
 .comment-area{
     height: 80vh;
-<<<<<<< HEAD
-=======
     bottom: 6vh;
->>>>>>> 47c58b6 (chat)
 }
  
     

@@ -2,143 +2,15 @@ const express = require('express')
 const cors = require('cors') 
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-<<<<<<< HEAD
-const userModel = require('./modeles/Users')
-const {MongoClient} = require('mongodb')
-
-
-=======
 const http = require('http')
 const userModel = require('./modeles/Users')
 const {MongoClient} = require('mongodb')
 // const db = client.db('mongotut')
->>>>>>> 47c58b6 (chat)
 
 const bcrypt = require('bcryptjs')
 const app = express()
 const port = 3001
 
-<<<<<<< HEAD
-
-
-app.use(cors(
-    { origin :  ["https://sheesapp.onrender.com" , "http://localhost:3000" ] }
-    
-    ))
-
-app.use(express.json())
-
-const Post = require('./modeles/Posts')
-const Comment = require('./modeles/Comments')
-
-
-async function main (){
-    const client  = new MongoClient('mongodb+srv://zarhounehoussine:zarhoune@users.avi47la.mongodb.net/gallery?retryWrites=true&w=majority')
-    await client.connect()
-    const db = client.db('gallery')
-    console.log('client connected :p')
-
-    //////////:signup
-
-    app.post('/signup' , async (req , res)=>{
-        const {fullname , username , email , password } = req.body
-        const pwd = await bcrypt.hash(req.body.password , 10)
-       
-        const user = new userModel({
-        
-            fullname : req.body.fullname ,
-            username  : req.body.username ,
-            password : pwd ,
-            email :   req.body.email ,
-            pdp : 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-            followers :[] ,
-            following :[]
-        }) 
-        try {
-         if (fullname && username && email && password ) {
-            db.collection('users').insertOne(user).then(()=>{
-                console.log( "user added successfully")
-                  res.send({status : "ok" , message : "user added successfully"})
-            }).catch(()=>{
-                res.send({status :'err' , message : 'username/email is already is use!'})
-                console.log( "somthing wrong !!")
-            })
-          
-         }else{
-            res.send({status : "err" , message : "please fill all the form!"})
-         }
-
-        } catch (error) {
-             
-        }
-    })
-
-    /////////login
-
-    app.post('/login' , async (req , res)=>{
-
-      
-        const user = await userModel.findOne({
-            email : req.body.email 
-        })  
-       const isPwdValid = await bcrypt.compare(req.body.password , user.password)
-
-        if(!user){
-             res.send({status : 'err' , message :'user not found'})
-        }
-        if(!isPwdValid && user){
-            res.send({status : 'err' , message : 'wrong credintials'})
-        }
-
-        
-        if( user &&  isPwdValid) { 
-            const { fullname , username , email  , followers , following , pdp } = user
-            const token = jwt.sign({
-                fullname , username , email  , followers , following , pdp
-            } , "shikamaru_320")
-
-
-              
-             res.send({status : 'ok'   ,info :token}) 
-        } 
-
-     
-
-       
-    })  
-
-    app.get('/user' , async (req , res)=>{
-        const tk = req.headers['x-access-token']
-       
-          if (tk) {
-            const user = jwt.verify(tk ,"shikamaru_320" )
-            userModel.findOne({email : user.email})
-            .then((result)=>{
-                res.send({result , status : 'ok'})
-            })
-           .catch (error =>res.send({status : 'err' , message : 'invalid Token !'}) ) 
-          }
-    })
-
-   
-    app.post("/add-video" , async(req , res)=>{
-        const { url  , caption , tags , likers , savers , username , id} = req.body
-        const post  = new Post({
-            url  , caption , tags , likers , savers , id ,username
-       })
-        if(username , url  ){
-            db.collection('posts').insertOne(post).then(()=>{
-                res.send({status : "ok" , message : "your Shee is posted."})
-            })
-            .catch((err)=>{
-                res.send({status : "err" , message : "Somthing went wrong"})
-            })
-        }else{
-            res.send({status : "err" , message : "Something wrong while uploading your video!"})
-        }
-
-    })    
-=======
 const Post = require('./modeles/Posts')
 const Comment = require('./modeles/Comments')
 const { uploadHandler, uploadVideo } = require('./upload-handler')
@@ -148,8 +20,6 @@ const MONGO_URL = 'mongodb+srv://zarhounehoussine:zarhoune@users.avi47la.mongodb
 
 
 
-<<<<<<< HEAD
-=======
 // if (process.env.NODE_ENV === 'production') {
 //     app.use(express.static(path.join(__dirname, '../../client/build')));
 //     app.get('*', (req, res) => {
@@ -158,13 +28,12 @@ const MONGO_URL = 'mongodb+srv://zarhounehoussine:zarhoune@users.avi47la.mongodb
 //       );
 //     });
 //   }
->>>>>>> fe8579a145a2afdd3979aa5dcb2c5346ddca42ad
 
 app.use(cors({ origin :  ["https://sheesapp.onrender.com"  , 'http://localhost:3000'] }))
 app.use(express.json())
 const server = http.createServer(app)
 /////////// socket io     
-const  {Server} = require('socket.io')  
+const  {Server} = require('socket.io') 
 
 const io = new Server(server ,{
     cors :{
@@ -174,27 +43,33 @@ const io = new Server(server ,{
 })
 
 
-const onlineUsers = []
+let users = []
 io.on('connection' , (socket)=>{
-        const username = socket.handshake.query.id
-        
-    // socket.on('join-line' , ()=>{
-        socket.join(username)
-    //     console.log(socket.rooms)
-    // })
+    
+    socket.on('addUser' , (username)=>{
+        const UserExi = users.some((user)=> user?.username === username  )
+        !UserExi && users.push({username , socketId : socket.id})
+        io.emit('getUsers' , users)
+     })
 
-    socket.on('send-message' , (data)=>{
-        const {message , friend_id} = data
-        socket.broadcast.to(friend_id).emit('receive-message' , message)
-        // console.log(message , 'to :' , friend_id)
-    })
-    socket.on("disconnect", () => {
-        socket.rooms.size === 0
-        // console.log(socket.rooms)
-      });
+
+     socket.on('send-message' , (data)=>{
+        const {message , username} = data
+        const receiver = users.find((user)=>{
+            return user?.username === username
+        })
+        io.to(receiver?.socketId).emit('receive-message' , message)
+        io.to(socket.id).emit('send-message' , data)
+
+     } )
+    
+     socket.on('disconnect' , ()=>{
+        users = users.filter((user)=>user?.socketId !== socket.id)
+        io.emit('getUsers' , users)
+     })
 
 })
-////////////////////////
+////////////////////////s
 
 
 let  gfs ;
@@ -401,25 +276,12 @@ app.post("/add-video", async(req , res)=>{
  
 
 })    
->>>>>>> 47c58b6 (chat)
 
 
 
 
        
 
-<<<<<<< HEAD
-    app.get('/shees' ,   async (req , res)=>{
-           const posts =  db.collection('posts').find({})
-           const resuls  = await posts.toArray()  
-           res.send({shees :resuls , status :'ok'})        
-           if(!resuls) res.send({status : "err" , message : "Somthing went wrong"})
-
-    })      
-
-
-    app.get('/shees/:id' , async (req , res)=>{
-=======
 app.get('/shees' ,   async (req , res)=>{
         const posts =  db.collection('posts').find({})
         const resuls  = await posts.toArray()  
@@ -439,7 +301,6 @@ app.get('/users/:username' ,   async (req , res)=>{
 
 
 app.get('/shees/:id' , async (req , res)=>{
->>>>>>> 47c58b6 (chat)
         const i = req.params.id
          const post = await db.collection('posts').findOne({ id :i})
         // const post  = await Post.findById(i)
@@ -550,10 +411,6 @@ app.get('/publications/:username/:saved' , async (req , res)=>{
     res.send({data})
 })
   
-<<<<<<< HEAD
-  
-  
-=======
 ////////////////// 
 
 
@@ -658,7 +515,6 @@ app.post('/create-chat' , async(req, res)=>{
   
 })
 
->>>>>>> 47c58b6 (chat)
 
 
 
@@ -676,21 +532,12 @@ main()
 mongoose.connect(
     'mongodb+srv://zarhounehoussine:zarhoune@users.avi47la.mongodb.net/gallery'
    ).then(()=>{
-<<<<<<< HEAD
-        console.log('Mongodb connected ;)')
-=======
         console.log('Mongofb is connectted')
->>>>>>> 47c58b6 (chat)
    })
 
 
 
 
-<<<<<<< HEAD
-app.listen(port , ()=>{
-    console.log('server is still running.. @_@')
-=======
 server.listen(port , ()=>{
     console.log('server is still running..')
->>>>>>> 47c58b6 (chat)
 })

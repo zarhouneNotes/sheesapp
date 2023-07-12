@@ -24,7 +24,7 @@ function ProfileBody({shees ,load,user , auth ,setSaved }) {
 
    
 
-    let elemClass = "col-4 bg-inf p-1  col-md-3"
+    let elemClass = "col-4 bg-inf   col-md-3"
   return (
     <div className=''>
         <div className="d-flex justify-content-around border-bottom">
@@ -32,7 +32,7 @@ function ProfileBody({shees ,load,user , auth ,setSaved }) {
                { user?.username == auth?.username && <small onClick={handelclick_}  className={ `${cl}  ${!status && ac_cl} ` }  >Saved Shees </small>}
         </div>
 
-        <div className="text-cent d-flex flex-wrap bg-secodary ">
+        <div className="text-cent d-flex flex-wrap "   >
             
            {
             load ? 
@@ -43,9 +43,9 @@ function ProfileBody({shees ,load,user , auth ,setSaved }) {
             
             :
            shees?.map((post)=>{
-            return <Link className={elemClass} state={post} to={`/user/${post?.username}/shees`}  >
+            return <Link className={elemClass} state={post} to={`/user/${post?.username}/shees`} style={{padding : " 0 2.5px"}} >
                   
-                    <div className=" bg-dar col-8 vid"     >
+                    <div className=" bg-dar col-12 vid px1"     >
                       <video className='w-100 h-100' >
                         <source src={`${post?.url}`} type='video/mp4' />
                       </video>
