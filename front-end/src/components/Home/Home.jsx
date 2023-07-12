@@ -74,7 +74,7 @@ function Home() {
     <AppContext.Provider value={{auth , socket , isMobile}}>
 
   
-    <div className='home bg-danr flex-column-reverse flex-lg-row d-flex   justify-content-between' >
+    <div className='home bg-danr flex-column-reverse flex-lg-row d-flex   justify-content-betwee' >
       
          <div className='navbarr h-10  col-lg-2 px-2'>
            <Navbar />
