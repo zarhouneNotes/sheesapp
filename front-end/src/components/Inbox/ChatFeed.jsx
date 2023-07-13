@@ -87,10 +87,9 @@ function sendHandel (e){
 
 useEffect(()=>{
   socket.current?.on('receive-message' , (message)=>{
-    if (chatIdGen(auth?.username ,message?.sender) === chat?.chatId ) {
-     // setMessages((prev)=>[...prev , message])
-      setMessages([...messages , message])
-    } 
+    // if (chatIdGen(auth?.username ,message?.sender) === chat?.chatId ) {
+      setMessages((prev)=>[...prev , message])
+    // } 
   })
 
 },[socket])
