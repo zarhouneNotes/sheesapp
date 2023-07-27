@@ -1,0 +1,7 @@
+/node_modules
+<<<<<<< HEAD
+/uploads
+=======
+/public
+>>>>>>> 47c58b6 (chat)
+/.env
