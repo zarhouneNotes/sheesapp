@@ -10,10 +10,6 @@
 
 # production
 /build
-<<<<<<< HEAD
-
-=======
->>>>>>> 47c58b6 (chat)
 # misc
 /.env
 .DS_Store
