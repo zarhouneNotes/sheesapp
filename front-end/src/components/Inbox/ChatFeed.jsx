@@ -16,7 +16,7 @@ import ProfileLoad from '../Profile/ProfileLoad'
 
 function ChatFeed({defineActiveChatBox}) {
   const {auth  , socket , isMobile} = useContext(AppContext)
- 
+  const navigate = useNavigate()
   const params = useParams()
   const [chat , setChat] = useState()
   const [messages , setMessages] = useState()
@@ -36,7 +36,9 @@ useEffect(()=>{
         setChat(res.data)
         setMessages(res?.data?.messages)
         defineActiveChatBox(res.data?.chatId)
-        const friend_id = res.data?.members[0] == auth?.username ? res.data?.members[1] : res.data?.members[0]
+        
+        const friend_id = res.data?.members.find((user)=> user?.username !== auth?.username)
+        if(!friend_id) return navigate('/inbox')
         getUser(friend_id)
         .then((user)=>{
           
