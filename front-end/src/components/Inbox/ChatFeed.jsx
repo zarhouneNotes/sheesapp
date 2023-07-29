@@ -37,8 +37,9 @@ useEffect(()=>{
         setMessages(res?.data?.messages)
         defineActiveChatBox(res.data?.chatId)
         
-        const friend_id = res.data?.members.find((user)=> user?.username !== auth?.username)
-        if(!friend_id) return navigate('/inbox')
+        const friend_id = res.data?.members[0] == auth?.username ?  res.data?.members[1] : res.data?.members[0]
+        
+        // if(!friend_id) return avigate('/inbox')
         getUser(friend_id)
         .then((user)=>{
           
