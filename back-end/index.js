@@ -184,7 +184,7 @@ app.post('/signup' , async (req , res)=>{
         username  : req.body.username ,
         password : pwd ,
         email :   req.body.email ,
-        pdp : 'default.png',
+        pdp : '1690631206171_149071.png',
         followers :[] ,
         following :[]
     }) 
