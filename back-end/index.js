@@ -16,7 +16,7 @@ const Comment = require('./modeles/Comments')
 const { uploadHandler, uploadVideo } = require('./upload-handler')
 const  Grid  = require('gridfs-stream')
 const ChatModel = require('./modeles/Chat')
-const MONGO_URL = ''
+const MONGO_URL = 'mongodb+srv://zarhounehoussine:zarhoune@users.avi47la.mongodb.net/gallery?retryWrites=true&w=majority'
 
 
 
