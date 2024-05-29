@@ -27,7 +27,7 @@ function UsersList({label}) {
             
     }, [auth])
   return (
-    <div className='border-lef bg-ipfo h-10 ' style={{ overflowY :'scroll'  }}>
+    <div className='border-lef bg-ipfo h-10 ' style={{ overflowY :'scroll'  , height : '100vh' }}>
 { label &&       <div className='d-flex py-2 border-bottom align-items-center gap-2'> <FaUserFriends fontSize='22px' />  <div className="fs-5">Users</div>   </div>
 }        <input ref={inputRef} placeholder='Search..' className='rounded-pill my-1 px-2'  onChange={(e)=>{
                 !e.target.value.length>0 ? setList(OrList) : setList(OrList?.filter((user)=> user?.username?.includes(e.target.value) || user?.fullname?.includes(e.target.value)  ))
